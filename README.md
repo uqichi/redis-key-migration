@@ -1,8 +1,6 @@
 # redis-key-migration
 
-## Setup
-
-https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/in-transit-encryption.html<Paste>
+## Basic
 
 ```bash
 export REDIS_PASSWORD=XXXXXXXXXX
@@ -29,3 +27,9 @@ FILE=keys.bak ./redis-mig.sh export
 ```bash
 FILE=keys.bak ./redis-mig.sh import
 ```
+
+## Full Specification
+
+
+```bash
+HOST=localhost PORT=6379 REDIS_PASSWORD=xxxxx DB=0 FILE=keys.bak ./redis-mig.sh export

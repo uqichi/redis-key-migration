@@ -1,20 +1,23 @@
 #!/bin/bash
 
-host=localhost
-port=6379
-password=${REDIS_PASSWORD}
-db=0
-url=redis://${password}@${host}:${port}/${db}
-
-file=${FILE}
-
 delim='|'
+
+file=${FILE:-keys.bak}
+
+host=${HOST:-localhost}
+port=${PORT:-6379}
+password=${REDIS_PASSWORD}
+db=${DB:-0}
+
+url=redis://${password:+"$password@"}${host}:${port}/${db}
 
 function _connect {
     redis-cli -u ${url}
 }
 
 function _export {
+    echo url: $url
+
     rm -f $file
 
     keys=`redis-cli -u ${url} --csv KEYS "*:user_tokens:*"`
@@ -29,6 +32,8 @@ function _export {
 }
 
 function _import {
+    echo url: $url
+
     while read row; do
         key=`echo ${row} | cut -d ${delim} -f 1`
         val=`echo ${row} | cut -d ${delim} -f 2`
