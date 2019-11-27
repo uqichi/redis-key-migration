@@ -28,8 +28,8 @@ FILE=keys.bak ./redis-mig.sh export
 FILE=keys.bak ./redis-mig.sh import
 ```
 
-## Full Specification
+## Full Example
 
 
 ```bash
-HOST=localhost PORT=6379 REDIS_PASSWORD=xxxxx DB=0 FILE=keys.bak ./redis-mig.sh export
+HOST=localhost PORT=6379 REDIS_PASSWORD=xxxxx DB=0 KEY_PATTERN="*user_tokens*" FILE=keys.bak ./redis-mig.sh export

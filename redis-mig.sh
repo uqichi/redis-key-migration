@@ -4,6 +4,8 @@ delim='|'
 
 file=${FILE:-keys.bak}
 
+key_pattern=${KEY_PATTERN:-*}
+
 host=${HOST:-localhost}
 port=${PORT:-6379}
 password=${REDIS_PASSWORD}
@@ -20,7 +22,7 @@ function _export {
 
     rm -f $file
 
-    keys=`redis-cli -u ${url} --csv KEYS "*:user_tokens:*"`
+    keys=`redis-cli -u ${url} --csv KEYS "${key_pattern}"`
 
     for key in ${keys//,/ }
     do
