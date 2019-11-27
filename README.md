@@ -12,6 +12,12 @@ export REDIS_PASSWORD=XXXXXXXXXX
 redis-cli -u redis://${REDIS_PASSWORD}@localhost:6379/0
 ```
 
+## Connecting
+
+```bash
+./redis-mig.sh connect
+```
+
 ## Exporting
 
 ```bash

@@ -41,6 +41,9 @@ subcommand="$1"
 shift
 
 case $subcommand in
+    connect)
+        _connect
+        ;;
     export)
         _export
         ;;
