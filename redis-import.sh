@@ -1,8 +1,9 @@
 #!/bin/bash
 
-while read row; do
-  column1=`echo ${row} | cut -d , -f 1`
-  column2=`echo ${row} | cut -d , -f 2`
+delim='|'
 
-  echo "${column1}のvalueは${column2}です。"
-done < $IMPORT_FILE
+while read row; do
+  key=`echo ${row} | cut -d $delim -f 1`
+  val=`echo ${row} | cut -d $delim -f 2`
+  redis-cli -u redis://${REDIS_PASSWORD}@localhost:6379/0 SET "$key" $val
+done < $FILE
