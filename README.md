@@ -15,11 +15,11 @@ redis-cli -u redis://${REDIS_PASSWORD}@localhost:6379/0
 ## Exporting
 
 ```bash
-FILE=out.csv ./redis-export.sh
+FILE=keys.bak ./redis-mig.sh export
 ```
 
 ## Importing
 
 ```bash
-FILE=out.csv ./redis-import.sh
+FILE=keys.bak ./redis-mig.sh import
 ```
