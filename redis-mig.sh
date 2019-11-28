@@ -4,8 +4,8 @@ delim='|'
 
 host=${REDIS_HOST:-localhost}
 port=${REDIS_PORT:-6379}
-password=${REDIS_PASSWORD}
 db=${REDIS_DB:-0}
+password=${REDIS_PASSWORD}
 
 url=redis://${password:+"$password@"}${host}:${port}/${db}
 
