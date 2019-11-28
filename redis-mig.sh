@@ -17,8 +17,6 @@ function _export {
     file=$1
     key_pattern=${2:-*}
 
-    echo url: $url
-
     rm -f $file
 
     keys=`redis-cli -u ${url} --csv KEYS "${key_pattern}"`
@@ -35,8 +33,6 @@ function _export {
 
 function _import {
     file=$1
-
-    echo url: $url
 
     while read row; do
         key=`echo ${row} | cut -d ${delim} -f 1`
