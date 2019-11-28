@@ -13,10 +13,10 @@ redis-cli -h localhost -p 6379 -n 0 -a ${REDIS_PASSWORD}
 ## How to use
 
 ```bash
-export REDIS_HOST // default: localhost
-export REDIS_PORT // default: 6379
-export REDIS_DB   // default: 0
-export REDIS_PASSWORD
+export REDIS_HOST=10.1.2.3 // default: localhost
+export REDIS_PORT=6380     // default: 6379
+export REDIS_DB=1          // default: 0
+export REDIS_PASSWORD=abcdefABCDEF
 ```
 
 ### Connect
