@@ -1,35 +1,38 @@
 # redis-key-migration
 
-## Basic
-
-```bash
-export REDIS_PASSWORD=XXXXXXXXXX
-```
+## Basic use
 
 ```bash
 redis-cli -u redis://${REDIS_PASSWORD}@localhost:6379/0
+
+or
+
+redis-cli -h localhost -p 6379 -n 0 -a ${REDIS_PASSWORD}
 ```
 
-## Connecting
+## How to use
+
+```bash
+export REDIS_HOST // default: localhost
+export REDIS_PORT // default: 6379
+export DB         // default: 0
+export REDIS_PASSWORD
+```
+
+### Connect
 
 ```bash
 ./redis-mig.sh connect
 ```
 
-## Exporting
+### Export
 
 ```bash
-FILE=keys.bak ./redis-mig.sh export
+./redis-mig.sh export ./keys.bak "*user_tokens*"
 ```
 
-## Importing
+### Import
 
 ```bash
-FILE=keys.bak ./redis-mig.sh import
+./redis-mig.sh import ./keys.bak
 ```
-
-## Full Example
-
-
-```bash
-HOST=localhost PORT=6379 REDIS_PASSWORD=xxxxx DB=0 KEY_PATTERN="*user_tokens*" FILE=keys.bak ./redis-mig.sh export

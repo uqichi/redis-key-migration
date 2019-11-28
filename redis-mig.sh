@@ -2,14 +2,10 @@
 
 delim='|'
 
-file=${FILE:-keys.bak}
-
-key_pattern=${KEY_PATTERN:-*}
-
-host=${HOST:-localhost}
-port=${PORT:-6379}
+host=${REDIS_HOST:-localhost}
+port=${REDIS_PORT:-6379}
 password=${REDIS_PASSWORD}
-db=${DB:-0}
+db=${REDIS_DB:-0}
 
 url=redis://${password:+"$password@"}${host}:${port}/${db}
 
@@ -18,6 +14,9 @@ function _connect {
 }
 
 function _export {
+    file=$1
+    key_pattern=${2:-*}
+
     echo url: $url
 
     rm -f $file
@@ -27,13 +26,15 @@ function _export {
     for key in ${keys//,/ }
     do
         key=${key//\"}
-        val=$(redis-cli -u redis://${REDIS_PASSWORD}@localhost:6379/0 GET $key | sed 's/"/\\"/g')
-        ttl=$(redis-cli -u redis://${REDIS_PASSWORD}@localhost:6379/0 TTL $key)
-        echo "${key}${delim}${val}${delim}${ttl}" >> $FILE
+        val=$(redis-cli -u ${url} GET $key | sed 's/"/\\"/g')
+        ttl=$(redis-cli -u ${url} TTL $key)
+        echo "${key}${delim}${val}${delim}${ttl}" >> $file
     done
 }
 
 function _import {
+    file=$1
+
     echo url: $url
 
     while read row; do
@@ -52,10 +53,10 @@ case $subcommand in
         _connect
         ;;
     export)
-        _export
+        _export $1 $2
         ;;
     import)
-        _import
+        _import $1
         ;;
     *)
         echo no such subcommand
