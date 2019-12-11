@@ -20,7 +20,6 @@ function _export {
     rm -f $file
 
     keys=`redis-cli -u ${url} --csv KEYS "${key_pattern}"`
-    echo total keys: ${#keys[@]}
 
     for key in ${keys//,/ }
     do
